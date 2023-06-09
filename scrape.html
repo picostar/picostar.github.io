@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Scraping Images and hrefs</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  // Get the URL of the page to scrape
+  var url = "https://www.example.com";
+
+  // Get the images and hrefs from the page
+  $.ajax({
+    url: url,
+    dataType: "html",
+    success: function(html) {
+      // Create a table to store the images and hrefs
+      var table = $("<table>");
+
+      // Find all the images and hrefs on the page
+      var images = $(html).find("img");
+      var hrefs = $(html).find("a");
+
+      // Add each image and href to the table
+      for (var i = 0; i < images.length; i++) {
+        var image = images[i];
+        var href = hrefs[i];
+
+        table.append("<tr><td><img src='" + image.src + "' alt='" + image.src + "'></td><td><a href='" + href.href + "'>" + href.href + "</a></td></tr>");
+      }
+
+      // Append the table to the body
+      $("body").append(table);
+    }
+  });
+});
+</script>
+</body>
+</html>
